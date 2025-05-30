@@ -9,13 +9,26 @@ interface CalendarGridProps {
     setCurrentDate: (date: Date) => void;
 }
 
-export default function CalendarGrid({ currentDate, setCurrentDate }: CalendarGridProps) {
-    const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+export default function CalendarGrid({
+    currentDate,
+    setCurrentDate,
+}: CalendarGridProps) {
+    const firstDay = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        1,
+    );
+    const lastDay = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        0,
+    );
 
     const days: JSX.Element[] = [];
     for (let i = 0; i < firstDay.getDay(); i++) {
-        days.push(<div key={`empty-${i}`} className="h-24 bg-gray-800 rounded-lg" />);
+        days.push(
+            <div key={`empty-${i}`} className="h-24 bg-gray-800 rounded-lg" />,
+        );
     }
 
     for (let i = 1; i <= lastDay.getDate(); i++) {
@@ -24,7 +37,10 @@ export default function CalendarGrid({ currentDate, setCurrentDate }: CalendarGr
 
     return (
         <div>
-            <CalendarHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
+            <CalendarHeader
+                currentDate={currentDate}
+                setCurrentDate={setCurrentDate}
+            />
             <div className="calendar-grid">
                 <div className="grid grid-cols-7 gap-1 text-center font-semibold text-gray-500 mb-2">
                     <div>SUN</div>

@@ -42,6 +42,19 @@ export default function AllEventsPanel({
         setShowEventDetails(true);
     };
 
+    const getColorClass = (status: "regular" | "important" | "urgent") => {
+        switch (status) {
+            case "regular":
+                return "border-green-600";
+            case "important":
+                return "border-yellow-600";
+            case "urgent":
+                return "border-red-600";
+            default:
+                return "border-green-600";
+        }
+    };
+
     const getSortModeLabel = () => {
         switch (sortMode) {
             case "all":
@@ -134,7 +147,7 @@ export default function AllEventsPanel({
                             if (isNewDate) {
                                 acc.push(
                                     <div
-                                        key={event.id}
+                                        key={event.id + "-date"}
                                         className={`font-bold mt-4 mb-2 pt-2 border-t border-gray-200 ${modes[selectedMode].text}`}
                                     >
                                         {formatDateDisplay(eventDate)}
@@ -145,7 +158,11 @@ export default function AllEventsPanel({
                             acc.push(
                                 <div
                                     key={event.id}
-                                    className={`p-3 ${modes[selectedMode].panelBg} rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 mb-2`}
+                                    className={`p-3 ${
+                                        modes[selectedMode].panelBg
+                                    } rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 mb-2 ${getColorClass(
+                                        event.status,
+                                    )}`}
                                     onClick={() =>
                                         event.id && handleEventClick(event.id)
                                     }

@@ -1,4 +1,8 @@
 "use client";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 
 import CalendarGrid from "@/components/Calendar/CalendarGrid";
 import AllEventsPanel from "@/components/Event/AllEventsPanel";
@@ -10,9 +14,6 @@ import Loader from "@/components/UI/Loader";
 import { useCalendarStore } from "@/lib/stores/calendarStore";
 import { useEventStore } from "@/lib/stores/eventStore";
 import { useUserStore } from "@/lib/stores/userStore";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Calendar() {
     const { selectedDate, isReverseView, themes, selectedTheme } =
@@ -89,6 +90,12 @@ export default function Calendar() {
         return (
             <div className="flex justify-center items-center h-screen text-red-500">
                 {error}
+                <button
+                    className={"m-4 w-[250px] py-2 px-4 rounded-lg"}
+                    onClick={() => window.location.reload()}
+                >
+                    Reload App
+                </button>
             </div>
         );
     }
@@ -105,11 +112,29 @@ export default function Calendar() {
                     className={`w-[300px] h-[300px] ${themes[selectedTheme].primary} absolute -z-50 left-1/2 top-1/2 rounded-full blur-3xl opacity-75 shadow-2xl`}
                 ></div>
 
-                <div className="absolute flex flex-col items-center top-6 left-1/2 -translate-x-1/2 z-50 text-white">
-                    <span className="text-xl">{user?.email}</span>
-                    <span className="text-lg italic text-gray-500 opacity-50">
-                        @{user?.username || "Guest"}
-                    </span>
+                <div className="flex justify-between z-50 text-white mb-10 mt-2">
+                    <div
+                        className="flex py-2 px-4 rounded-md justify-center items-center shadow-lg"
+                        style={{
+                            backgroundColor: "rgba(25, 25, 25, 0.7)",
+                        }}
+                    >
+                        <FaUser size={30} />
+                        <div className="flex flex-col ml-4">
+                            <span className="text-xl">{user?.email}</span>
+                            <span className="text-lg italic text-gray-500 opacity-100">
+                                @{user?.username || "Guest"}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button
+                        className="flex px-6 bg-red-600 hover:bg-red-700 text-white rounded-lg items-center justify-center transition-colors duration-200 shadow-lg font-bold"
+                        onClick={() => router.push("/auth/signin")}
+                    >
+                        <span className="mr-2">Sign Out</span>
+                        <FaSignOutAlt size={20} />
+                    </button>
                 </div>
 
                 <div className="flex flex-col md:flex-row">

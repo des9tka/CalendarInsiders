@@ -1,4 +1,3 @@
-// EventDetails.tsx
 "use client";
 
 import { useCalendarStore } from "@/lib/stores/calendarStore";

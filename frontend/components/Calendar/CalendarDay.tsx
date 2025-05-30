@@ -1,4 +1,3 @@
-// CalendarDay.tsx
 "use client";
 
 import { useCalendarStore } from "@/lib/stores/calendarStore";
@@ -47,14 +46,14 @@ export default function CalendarDay({ day, currentDate }: CalendarDayProps) {
         setSelectedDate(currentCellDate);
     };
 
-    const getColorClass = (color: string) => {
-        switch (color) {
-            case "green":
+    const getColorClass = (status: "regular" | "important" | "urgent") => {
+        switch (status) {
+            case "regular":
                 return "bg-green-600";
-            case "red":
-                return "bg-red-600";
-            case "yellow":
+            case "important":
                 return "bg-yellow-600";
+            case "urgent":
+                return "bg-red-600";
             default:
                 return "bg-green-600";
         }
@@ -83,7 +82,9 @@ export default function CalendarDay({ day, currentDate }: CalendarDayProps) {
                 {dayEvents.map((event) => (
                     <div
                         key={event.id}
-                        className={`event-indicator rounded-full`}
+                        className={`event-indicator rounded-full ${getColorClass(
+                            event.status,
+                        )}`}
                     />
                 ))}
             </div>

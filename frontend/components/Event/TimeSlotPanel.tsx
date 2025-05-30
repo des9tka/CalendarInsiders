@@ -45,6 +45,19 @@ export default function TimeSlotPanel() {
         setShowEventDetails(true);
     };
 
+    const getColorClass = (status: "regular" | "important" | "urgent") => {
+        switch (status) {
+            case "regular":
+                return "border-green-600";
+            case "important":
+                return "border-yellow-600";
+            case "urgent":
+                return "border-red-600";
+            default:
+                return "border-green-600";
+        }
+    };
+
     return (
         <div>
             <h3
@@ -69,7 +82,11 @@ export default function TimeSlotPanel() {
                         dayEvents.map((event) => (
                             <div
                                 key={event.id}
-                                className={`p-3 ${modes[selectedMode].panelBg} rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4`}
+                                className={`p-3 ${
+                                    modes[selectedMode].panelBg
+                                } rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 ${getColorClass(
+                                    event.status,
+                                )} mb-2`}
                                 onClick={() =>
                                     event.id && handleEventClick(event.id)
                                 }

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+body {
+    position: relative;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://i.pinimg.com/736x/68/a4/33/68a43387adc3975cf0ec51e64fbe2579.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.calendar-day:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    cursor: pointer;
+    transition: all;
+    transition-duration: 0.33s;
+}
+
+.selected-day {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.event-indicator {
+    width: 8px;
+    height: 8px;
+    margin: 1px;
+}
+
+.calendar-container {
+    min-height: 600px;
+}
